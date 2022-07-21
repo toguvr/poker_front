@@ -196,8 +196,14 @@ const Room: React.FC = () => {
         </CardSection>
         {userIsParticipant && (
           <VoteSection>
+            <ButtonVote onClick={() => newVote(0)} selected={voted === 0}>
+              0
+            </ButtonVote>
             <ButtonVote onClick={() => newVote(1)} selected={voted === 1}>
               1
+            </ButtonVote>
+            <ButtonVote onClick={() => newVote(2)} selected={voted === 2}>
+              2
             </ButtonVote>
             <ButtonVote onClick={() => newVote(3)} selected={voted === 3}>
               3
