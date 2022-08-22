@@ -87,7 +87,7 @@ export const CardSection = styled.div`
 
 export const VoteSection = styled.div<VoteProps>`
   display: grid;
-  grid: repeat(2, 80px) / repeat(3, 80px);
+  grid: repeat(2, 80px) / repeat(4, 80px);
   justify-items: center;
   align-items: center;
 `;
