@@ -63,10 +63,13 @@ const Room: React.FC = () => {
       );
       if (
         allVoted.length === allInRoom.length &&
-        allInRoom.length > 1 &&
+        allInRoom.length > 0 &&
         areAllVotesEqual
       ) {
         confetti();
+        setTimeout(() => {
+          confetti.reset();
+        }, 2000);
       }
     } catch (err) {
     } finally {
