@@ -66,7 +66,11 @@ const Room: React.FC = () => {
         allInRoom.length > 1 &&
         areAllVotesEqual
       ) {
-        confetti();
+        confetti({
+          particleCount: 100,
+          startVelocity: 30,
+          spread: 360,
+        });
         setTimeout(() => {
           confetti.reset();
         }, 2000);
