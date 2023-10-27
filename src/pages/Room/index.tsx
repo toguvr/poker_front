@@ -63,7 +63,7 @@ const Room: React.FC = () => {
       );
       if (
         allVoted.length === allInRoom.length &&
-        allInRoom.length > 0 &&
+        allInRoom.length > 1 &&
         areAllVotesEqual
       ) {
         confetti();
