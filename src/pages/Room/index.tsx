@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { FaAngleLeft } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
+import confetti from 'canvas-confetti';
 import Button from '../../components/Button';
 import InputDefault from '../../components/InputDefault';
 import Logo from '../../assets/logo.png';
 import LogoMini from '../../assets/logo.png';
-
 import {
   Container,
   CardSection,
@@ -55,11 +55,24 @@ const Room: React.FC = () => {
     try {
       const response = await api.get(`/usersRoom/${currentRoom?.id}`);
       setAllInRoom(response.data);
+
+      const areAllVotesEqual = response.data.every(
+        (currentUser: UsersRoom, index: number, array: UsersRoom[]) => {
+          return currentUser.vote === array[0].vote && !!currentUser.vote;
+        },
+      );
+      if (
+        allVoted.length === allInRoom.length &&
+        allInRoom.length > 1 &&
+        areAllVotesEqual
+      ) {
+        confetti();
+      }
     } catch (err) {
     } finally {
       stop();
     }
-  }, [currentRoom.id]);
+  }, [currentRoom.id, allInRoom, allVoted]);
 
   const newRound = useCallback(async () => {
     start();
@@ -80,6 +93,12 @@ const Room: React.FC = () => {
       stop();
     }
   }, [topic, getRoomUsers]);
+
+  const handleKeyPress = (e: any) => {
+    if (e.key === 'Enter') {
+      newRound();
+    }
+  };
 
   const newVote = useCallback(
     async (vote: number) => {
@@ -228,6 +247,7 @@ const Room: React.FC = () => {
               placeholder="Novo Tópico"
               name="topic"
               value={topic}
+              onKeyDown={handleKeyPress}
               onChange={(e) => setTopic(e.target.value)}
             />
             <Button style={{ marginTop: 16 }} onClick={newRound}>
