@@ -61,20 +61,20 @@ const Room: React.FC = () => {
           return currentUser.vote === array[0].vote && !!currentUser.vote;
         },
       );
-      if (
-        allVoted.length === allInRoom.length &&
-        allInRoom.length > 1 &&
-        areAllVotesEqual
-      ) {
-        confetti({
-          particleCount: 100,
-          startVelocity: 30,
-          spread: 360,
-        });
-        setTimeout(() => {
-          confetti.reset();
-        }, 2000);
-      }
+      // if (
+      //   allVoted.length === allInRoom.length &&
+      //   allInRoom.length > 1 &&
+      //   areAllVotesEqual
+      // ) {
+      //   confetti({
+      //     particleCount: 100,
+      //     startVelocity: 30,
+      //     spread: 360,
+      //   });
+      //   setTimeout(() => {
+      //     confetti.reset();
+      //   }, 2000);
+      // }
     } catch (err) {
     } finally {
       stop();
